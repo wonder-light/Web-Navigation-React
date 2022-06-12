@@ -136,7 +136,7 @@ input[type='checkbox'] {
 
 .home-header {
     position: fixed;
-    width: var(--wen-header-width);
+    width: min(260px, 60%);
     height: 100%;
     overflow: auto;
     top: 0;
@@ -147,6 +147,7 @@ input[type='checkbox'] {
 
     @media screen and (max-width: #{$narrow-width}) {
         left: -100%;
+        transition: all 0.3s;
     }
 }
 
@@ -291,7 +292,7 @@ input[type='checkbox'] {
 .layout {
     //弹性网格
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-gap: 20px;
 
     > div {

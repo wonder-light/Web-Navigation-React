@@ -1,13 +1,8 @@
 import '../assets/css/App.css';
-import { useContext} from "react";
 import MainRoute from "./router/route";
 import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
-    let context = useContext(require('../assets/js/MainContext').default)
-    context.narrow = window.innerWidth <= 950;
-    window.addEventListener('resize', () => context.narrow = window.innerWidth <= 950);
-    
     return (
         <Router>
             <MainRoute path={[]}/>

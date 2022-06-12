@@ -1,37 +1,16 @@
-import { useState } from "react";
+import { useContext} from "react";
 
 function WebNav() {
-    
-    let [checked, setChecked] = useState(sessionStorage.getItem('theme') === 'true');
-    let [show, setShow] = useState(false);
-    let [narrow, setNarrow] = useState(window.innerWidth <= 950);
-    let onChecked = (value) => {
-        sessionStorage.setItem('theme', value);
-        setChecked(value);
-    };
-    let scroll = (id) => document.getElementById(id).scrollIntoView({behavior: 'smooth'});
-    window.onscroll = () => {
-        //返回顶部
-        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        let old = show;
-        let v = scrollTop > 280;
-        setShow(v);
-        if (old === v) return;
-        let e = document.getElementById('scroll_top');
-        e.className = v ? 'scroll_top hidden-to-show' : 'scroll_top show-to-hidden';
-    };
-    
-    window.addEventListener('resize', () => setNarrow(window.innerWidth <= 950));
-    
+    let context = useContext(require('../assets/js/MainContext').default)
     return (
-        narrow?(
-            <div style={{width:'100%'}}>
+        context.narrow ? (
+            <div style={{width: '100%'}}>
                 <nav className="main-nav" id="main-nav">
                     <div className="main-nav-up">
                         <div className="logo">
                             <a href="/">{'nianian'.toUpperCase() /*Logo*/}</a>
                         </div>
-                        <div>
+                        <div hidden={context.showMenu} onClick={() => context.setShowMenu(true)}>
                             <svg t="1655019088595" className="icon" viewBox="0 0 1024 1024" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg" p-id="2659" width="200" height="200">
                                 <path
@@ -45,8 +24,16 @@ function WebNav() {
                                     p-id="2662" fill="#2c2c2c"></path>
                             </svg>
                         </div>
+                        <div hidden={!context.showMenu} onClick={() => context.setShowMenu(false)}>
+                            <svg t="1655022149254" className="icon" viewBox="0 0 1024 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="2215" width="200" height="200">
+                                <path
+                                    d="M453.44 512L161.472 220.032a41.408 41.408 0 0 1 58.56-58.56L512 453.44 803.968 161.472a41.408 41.408 0 0 1 58.56 58.56L570.56 512l291.968 291.968a41.408 41.408 0 0 1-58.56 58.56L512 570.56 220.032 862.528a41.408 41.408 0 0 1-58.56-58.56L453.44 512z"
+                                    fill="#2c2c2c" p-id="2216"></path>
+                            </svg>
+                        </div>
                     </div>
-                    <div id="scroll_top" className="scroll_top" onClick={() => scroll('main-nav')}>
+                    <div id="scroll_top" className="scroll_top" onClick={() => context.scrollTo('main-nav')}>
                         <svg t="1654967035524" className="icon" viewBox="0 0 1024 1024" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" p-id="4692" width="200" height="200">
                             <path
@@ -65,7 +52,7 @@ function WebNav() {
                     </div>
                 </div>
             </div>
-        ):(
+        ) : (
             <nav className="main-nav" id="main-nav">
                 <div className="search">
                     <input type="search" id="site-search" name="site-search" placeholder="输入关键词搜索"/>
@@ -75,10 +62,10 @@ function WebNav() {
                     </button>
                 </div>
                 <div className="main-nav-r">
-                    <input className="switch" type="checkbox" checked={checked}
-                           onChange={(v) => onChecked(v.target.checked)}/>
+                    <input className="switch" type="checkbox" checked={context.theme === 'dark'}
+                           onChange={(v) => context.saveTheme(v.target.checked)}/>
                 </div>
-                <div id="scroll_top" className="scroll_top" onClick={() => scroll('main-nav')}>
+                <div id="scroll_top" className="scroll_top" onClick={() => context.scrollTo('main-nav')}>
                     <svg t="1654967035524" className="icon" viewBox="0 0 1024 1024" version="1.1"
                          xmlns="http://www.w3.org/2000/svg" p-id="4692" width="200" height="200">
                         <path

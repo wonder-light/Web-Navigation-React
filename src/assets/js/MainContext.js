@@ -532,10 +532,11 @@ for (let obj of mapObj) {
 let state = {
     axios: axios,
     nav: mapObj,
-    //狭窄的屏幕控
-    //narrow: window.innerWidth <= 950,
+    //滚动到指定ID处
+    scrollTo: (id) => document.getElementById(id).scrollIntoView({behavior: 'smooth'}),
 };
-
+//狭窄的屏幕控
+//narrow: window.innerWidth <= 950,
 //window.addEventListener('resize', () => state.narrow = window.innerWidth <= 950);
 
 let MainContext = React.createContext(state);
