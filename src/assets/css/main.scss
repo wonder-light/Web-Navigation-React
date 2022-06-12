@@ -1,0 +1,371 @@
+@import "App.css";
+@import "index.css";
+
+//变量
+$theme: light;
+$background: if($theme == light, #f2f3fa, #1e1e1e); //背景色
+$foreground: if($theme == light, #ffffff, #262626); //前景色
+$color: if($theme == light, #000000, #ffffff); //字体色
+$narrow-width: 950px; //狭窄的屏幕宽度
+
+:root {
+    //导航宽度
+    --wen-header-width: 260px;
+    @media screen and (max-width: #{$narrow-width}) {
+        --wen-header-width: 0;
+    }
+    --theme: light;
+    --narrow-width: #{$narrow-width};
+}
+
+/* 滚动条整体样式 */
+::-webkit-scrollbar {
+    width: 6px;
+    display: block;
+
+}
+
+/* 滚动条里的轨道：滚动槽 */
+::-webkit-scrollbar-track {
+    border-radius: 12px;
+}
+
+/* 滚动条里的小方块：滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    background: #0EDEEE99;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #C730F299;
+}
+
+body {
+    font-size: 15px;
+    background-color: #{$background};
+}
+
+svg {
+    width: 25px;
+    height: 25px;
+}
+
+a {
+    color: #{$color};
+    text-decoration: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+input {
+    width: 350px;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    background-color: #{$background};
+    padding: 0 10px;
+
+    &:focus {
+        box-shadow: 0 0 2px #3b75fb;
+        outline: 0;
+    }
+}
+
+input[type='checkbox'] {
+    --length: 70px;
+    --height: 26px;
+    --radius: 16px;
+    --border: 2px;
+    --min-left: 8px;
+    appearance: none;
+    width: var(--length);
+    height: var(--height);
+    position: relative;
+    border-radius: calc(var(--radius));
+    cursor: pointer;
+    background-color: #777;
+    padding: 0 calc(var(--radius) / 2);
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: calc(var(--height) - 2 * var(--border));
+        height: calc(var(--height) - 2 * var(--border));
+        background: white;
+        left: var(--min-left);
+        top: var(--border);
+        border-radius: 50%;
+        transition: left cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s;
+    }
+
+    &:after {
+        content: "🌜🌞";
+        width: 100%;
+        display: inline-block;
+        white-space: nowrap;
+        color: white;
+        font-size: 18px;
+        line-height: var(--height);
+        font-family: monospace;
+        font-weight: bold;
+        text-align-last: justify; //字符两端对齐
+    }
+
+    &:checked {
+        background-color: limegreen;
+
+        &:before {
+            left: calc(var(--length) - var(--min-left) - (var(--height) - 2 * var(--border)));
+        }
+
+        &:after {
+            color: black;
+        }
+    }
+}
+
+.border {
+
+}
+
+.main-body {
+    margin-left: var(--wen-header-width);
+}
+
+.home-header {
+    position: fixed;
+    width: var(--wen-header-width);
+    height: 100%;
+    overflow: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: #{$foreground};
+
+    @media screen and (max-width: #{$narrow-width}) {
+        left: -100%;
+    }
+}
+
+.home-header.show {
+    left: 0;
+    transition: all 0.3s;
+}
+
+.logo {
+    width: 100%;
+    font-size: 42px;
+    line-height: 80px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #{$foreground};
+
+    a {
+        padding-left: 40px;
+    }
+}
+
+.type-list {
+    text-align: left;
+    line-height: 40px;
+
+    div {
+        padding-left: 40px;
+        transition: all 0.2s;
+
+        &:hover {
+            background-color: #3b75fb;
+
+            a {
+                color: white;
+            }
+        }
+    }
+}
+
+.main-nav, .main-nav-up {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #{$foreground};
+    padding: 0 30px;
+}
+
+.main-nav {
+    @media screen and (max-width: #{$narrow-width}) {
+        flex-direction: column;
+    }
+}
+
+.main-nav-up {
+    width: 100%;
+
+    .logo {
+        width: min(210.8px, 100%);
+    }
+
+    svg {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.main-nav-r {
+    display: inline-block;
+    line-height: 80px;
+}
+
+.search-outer {
+    padding: 0 30px;
+
+    input {
+        background-color: white;
+        border: 1px solid #3b75fb;
+    }
+}
+
+.search {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    --margin-left: 20px;
+    width: 510px;
+    @media screen and (max-width: #{$narrow-width}) {
+        width: 100%;
+    }
+
+    button {
+        margin-left: var(--margin-left);
+        width: calc(31.373% - var(--margin-left));
+        height: 40px;
+        border-radius: 20px;
+        border: 0;
+        background-color: #3b75fb;
+        color: #fff;
+        font-size: 15px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    input {
+        width: 68.627%;
+    }
+}
+
+.main-content {
+    margin: 20px;
+
+    > div {
+        margin: 40px 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 40px;
+        }
+    }
+
+    .nav-title {
+        text-align: left;
+        font-size: 18px;
+        margin: 10px;
+        line-height: 34px;
+        padding-left: 6px;
+        color: #{$color};
+    }
+
+    .layout {
+        margin: 10px;
+    }
+}
+
+.layout {
+    //弹性网格
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+
+    > div {
+        text-align: left;
+        background-color: #{$foreground};
+        transition: 0.3s all;
+        border-radius: 10px;
+
+        a {
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        img {
+            width: 18px;
+            height: 18px;
+            margin-right: 6px;
+        }
+
+        p {
+            line-height: 44px;
+            margin: 0;
+        }
+
+        &:hover {
+            box-shadow: 0 0 6px #3b75fb;
+        }
+    }
+}
+
+.scroll_top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5;
+    opacity: 0;
+
+    svg {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+.show-to-hidden {
+    animation: show-to-hidden 1s ease 0s 1 normal forwards running;
+}
+
+.hidden-to-show {
+    animation: hidden-to-show 1s ease 0s 1 normal forwards running;
+}
+
+@keyframes show-to-hidden {
+    from {
+        visibility: visible;
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes hidden-to-show {
+    from {
+        opacity: 0;
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.switch {
+
+}
