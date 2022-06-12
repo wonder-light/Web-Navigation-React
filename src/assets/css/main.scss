@@ -1,5 +1,4 @@
 @import "App.css";
-@import "index.css";
 
 //变量
 $theme: light;
@@ -15,24 +14,24 @@ $narrow-width: 950px; //狭窄的屏幕宽度
         --wen-header-width: 0;
     }
     --theme: light;
-    --narrow-width: #{$narrow-width};
+    --background: #f2f3fa;
+    --foreground: #ffffff;
+    --color: #000000;
 }
 
 /* 滚动条整体样式 */
 ::-webkit-scrollbar {
     width: 6px;
-    display: block;
-
 }
 
 /* 滚动条里的轨道：滚动槽 */
 ::-webkit-scrollbar-track {
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
 /* 滚动条里的小方块：滑块 */
 ::-webkit-scrollbar-thumb {
-    border-radius: 12px;
+    border-radius: 10px;
     background: #0EDEEE99;
 }
 
@@ -42,7 +41,11 @@ $narrow-width: 950px; //狭窄的屏幕宽度
 
 body {
     font-size: 15px;
-    background-color: #{$background};
+    background-color: var(--background);
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 svg {
@@ -51,7 +54,7 @@ svg {
 }
 
 a {
-    color: #{$color};
+    color: var(--color);
     text-decoration: none;
 
     &:hover {
@@ -59,12 +62,17 @@ a {
     }
 }
 
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 input {
     width: 350px;
     height: 40px;
     border-radius: 20px;
     border: 0;
-    background-color: #{$background};
+    background-color: var(--background);
     padding: 0 10px;
 
     &:focus {
@@ -126,6 +134,20 @@ input[type='checkbox'] {
     }
 }
 
+.theme-light {
+    --theme: light;
+    --background: #f2f3fa;
+    --foreground: #ffffff;
+    --color: #000000;
+}
+
+.theme-dark {
+    --theme: dark;
+    --background: #1e1e1e;
+    --foreground: #262626;
+    --color: #ffffff;
+}
+
 .border {
 
 }
@@ -143,7 +165,7 @@ input[type='checkbox'] {
     left: 0;
     bottom: 0;
     z-index: 1;
-    background-color: #{$foreground};
+    background-color: var(--foreground);
 
     @media screen and (max-width: #{$narrow-width}) {
         left: -100%;
@@ -164,7 +186,7 @@ input[type='checkbox'] {
     position: sticky;
     top: 0;
     left: 0;
-    background-color: #{$foreground};
+    background-color: var(--foreground);
 
     a {
         padding-left: 40px;
@@ -193,7 +215,7 @@ input[type='checkbox'] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #{$foreground};
+    background-color: var(--foreground);
     padding: 0 30px;
 }
 
@@ -281,7 +303,7 @@ input[type='checkbox'] {
         margin: 10px;
         line-height: 34px;
         padding-left: 6px;
-        color: #{$color};
+        color: var(--color);
     }
 
     .layout {
@@ -297,7 +319,7 @@ input[type='checkbox'] {
 
     > div {
         text-align: left;
-        background-color: #{$foreground};
+        background-color: var(--foreground);
         transition: 0.3s all;
         border-radius: 10px;
 

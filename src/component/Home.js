@@ -11,6 +11,11 @@ function Home() {
     context.showMenu = name;
     context.setShowMenu = method;
     
+    function saveTheme(theme) {
+        let body = document.getElementsByTagName('body')[0];
+        body.className = theme === 'light' ? 'theme-light' : 'theme-dark';
+    }
+    
     [name, method] = useState(sessionStorage.getItem('theme') !== 'dark' ? 'light' : 'dark');
     //主题，'light' - 亮, 'dark' - 暗
     context.theme = name;
@@ -19,7 +24,9 @@ function Home() {
         value = value === true ? 'dark' : 'light';
         sessionStorage.setItem('theme', value);
         context.setTheme(value);
+        saveTheme(value);
     };
+    saveTheme(context.theme);
     
     [name, method] = useState(window.innerWidth <= 950);
     //狭窄的屏幕控
