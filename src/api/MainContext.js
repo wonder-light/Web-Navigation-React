@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from "./axios";
 
 let mapObj = [
     {
@@ -532,7 +531,6 @@ for (let obj of mapObj) {
 
 let state = {
     title: '导航',
-    axios: axios,
     nav: mapObj,
     //滚动到指定ID处
     scrollTo: (id) => document.getElementById(id).scrollIntoView({ behavior: 'smooth' }),

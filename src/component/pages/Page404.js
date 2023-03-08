@@ -1,3 +1,5 @@
+import { publicUrl } from '../../api/env'
+
 export default function Page404(props) {
     let att = props ? structuredClone(props) : {};
     att.style = Object.assign({
@@ -8,6 +10,6 @@ export default function Page404(props) {
         justifyContent: "center"
     }, att.style ?? {})
     return <div { ...att }>
-        <img src="/img/404.svg" alt="404"/>
+        <img src={ `${ publicUrl }/img/404.svg` } alt="404"/>
     </div>
 }
