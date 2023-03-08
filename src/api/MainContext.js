@@ -524,16 +524,18 @@ let mapObj = [
         ]
     }
 ];
+
 let navMap = new Map();
 for (let obj of mapObj) {
     navMap.set(obj.key, obj.value);
 }
 
 let state = {
+    title: '导航',
     axios: axios,
     nav: mapObj,
     //滚动到指定ID处
-    scrollTo: (id) => document.getElementById(id).scrollIntoView({behavior: 'smooth'}),
+    scrollTo: (id) => document.getElementById(id).scrollIntoView({ behavior: 'smooth' }),
 };
 //狭窄的屏幕控
 //narrow: window.innerWidth <= 950,

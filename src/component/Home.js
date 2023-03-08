@@ -1,10 +1,10 @@
-import WebHeader from "./Header";
-import WebNav from "./Nav";
-import WebMain from "./Main";
-import MainContext from "../assets/js/MainContext";
 import { useContext, useState } from "react";
+import MainContext from "../api/MainContext";
+import WebHeader from "./Header";
+import WebMain from "./Main";
+import WebNav from "./Nav";
 
-function Home() {
+export default function Home() {
     let context = useContext(MainContext);
     let [name, method] = useState(false);
     // 显示菜单, false: 不显示, true: 显示
@@ -47,18 +47,15 @@ function Home() {
     };
     
     return (
-        <MainContext.Provider value={context}>
+        <MainContext.Provider value={ context }>
             <div className="App">
                 <WebHeader/>
                 <div className="main-body">
                     <WebNav/>
                     <WebMain/>
-                    <footer style={{height: '50px'}}>
-                    </footer>
+                    <footer style={ { height: '50px' } }/>
                 </div>
             </div>
         </MainContext.Provider>
     );
 }
-
-export default Home;
